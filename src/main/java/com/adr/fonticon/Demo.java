@@ -108,9 +108,11 @@ public class Demo extends Application {
 
         filter.setOnKeyReleased(event -> {
             flow.getChildren().clear();
+            String f = filter.getText().toUpperCase();
+            String ch = filter.getText();
 
             for (IconFont icon : icons) {
-                if (icon.toString().contains(filter.getText().toUpperCase())) {
+                if (icon.toString().contains(f) || icon.getString().equals(ch)) {
                     flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build()));
                 }
             }
