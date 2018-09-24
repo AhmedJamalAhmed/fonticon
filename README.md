@@ -32,7 +32,7 @@ Screenshots
 ===========
 
 ![Demo examples](https://raw.github.com/adrianromero/fonticon/master/screenshot-demo.png)
-![Demo examples](https://raw.github.com/AhmedJamalAhmed/fonticon/blob/master/demo_screenshot2.png)
+![Demo examples](https://raw.github.com/AhmedJamalAhmed/fonticon/master/demo_screenshot2.png)
 
 Demo examples
 
