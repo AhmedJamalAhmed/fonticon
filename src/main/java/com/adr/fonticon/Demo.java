@@ -17,9 +17,14 @@
 
 package com.adr.fonticon;
 
-import com.adr.fonticon.decorator.*;
+import com.adr.fonticon.lip.decorator.*;
+import com.adr.fonticon.lip.IconBuilder;
+import com.adr.fonticon.lip.support.FIcon;
+import com.adr.fonticon.lip.support.*;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
@@ -85,7 +90,7 @@ public class Demo extends Application {
         t.setContent(p);
         tabpane.getTabs().add(t);
 
-        List<? extends Class<? extends Enum<? extends IconFont>>> supportedIcons = Arrays.asList(
+        List<? extends Class<? extends Enum<? extends FIcon>>> supportedIcons = Arrays.asList(
                 FontAwesome.class,
                 IonIcons.class,
                 Octicons.class,
@@ -95,21 +100,21 @@ public class Demo extends Application {
                 Holo.class
         );
 
-        ArrayList<IconFont> all = new ArrayList<>();
-        for (Class<? extends Enum<? extends IconFont>> iconFont : supportedIcons) {
-            IconFont[] enumConstants = (IconFont[]) iconFont.getEnumConstants();
+        ArrayList<FIcon> all = new ArrayList<>();
+        for (Class<? extends Enum<? extends FIcon>> iconFont : supportedIcons) {
+            FIcon[] enumConstants = (FIcon[]) iconFont.getEnumConstants();
             all.addAll(Arrays.asList(enumConstants));
             tabpane.getTabs().add(addFontIcon(iconFont.getSimpleName(), enumConstants));
         }
 
-        tabpane.getTabs().add(1, addFontIcon("All Icons", all.toArray(new IconFont[0])));
+        tabpane.getTabs().add(1, addFontIcon("All Icons", all.toArray(new FIcon[0])));
 
         Scene scene = new Scene(tabpane);
         stage.setScene(scene);
         stage.show();
     }
 
-    private Tab addFontIcon(String name, IconFont[] icons) {
+    private Tab addFontIcon(String name, FIcon[] icons) {
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(5, 5, 5, 5));
         vBox.setSpacing(5);
@@ -123,7 +128,7 @@ public class Demo extends Application {
             String f = filter.getText().toUpperCase();
             String ch = filter.getText();
 
-            for (IconFont icon : icons) {
+            for (FIcon icon : icons) {
                 if (icon.toString().contains(f) || icon.getString().contains(ch)) {
                     flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build()));
                 }
@@ -143,8 +148,10 @@ public class Demo extends Application {
 
         flow.setPrefSize(width, screens.get(0).getBounds().getHeight() * 2 / 3);
 
-        for (IconFont icon : icons) {
-            flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build()));
+        for (FIcon icon : icons) {
+            flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build(), event -> {
+                System.out.println(icon.getFontName() + "." + icon.getString());
+            }));
         }
 
         ScrollPane p = new ScrollPane();
@@ -159,6 +166,12 @@ public class Demo extends Application {
 
     private Button createButton(Node graph) {
         return createButton((String) graph.getProperties().get("ICONLABEL"), graph);
+    }
+
+    private Button createButton(Node graph, EventHandler<ActionEvent> sds) {
+        Button but = createButton((String) graph.getProperties().get("ICONLABEL"), graph);
+        but.setOnAction(sds);
+        return but;
     }
 
     private Button createButton(String text, Node graph) {

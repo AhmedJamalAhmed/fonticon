@@ -15,9 +15,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
@@ -31,7 +29,7 @@ import javafx.scene.text.Font;
  *
  * @author adrian
  */
-public enum Octicons implements IconFontExt {
+public enum Octicons implements FIcon {
 
     SPACE(' '),
     
@@ -240,14 +238,8 @@ public enum Octicons implements IconFontExt {
     OCTICON_X('\uF081'),
     OCTICON_ZAP('\u26A1');
     
-    public static String OCTICONS = null;
-    
-    static {
-        try {
-            OCTICONS = Font.loadFont(Octicons.class.getResourceAsStream("fonts/octicons.ttf"), 10.0).getName();    
-        } catch (Exception e) {
-        }
-    } 
+    final public static String OCTICONS = FIcon.load("octicons.ttf");
+
     
     private final char character;
 

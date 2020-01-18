@@ -15,10 +15,13 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
+package com.adr.fonticon.lip;
 
-import com.adr.fonticon.decorator.FillPaint;
-import com.adr.fonticon.decorator.Shine;
+import com.adr.fonticon.lip.decorator.FillPaint;
+import com.adr.fonticon.lip.decorator.Shine;
+import com.adr.fonticon.lip.support.FontAwesome;
+import com.adr.fonticon.lip.decorator.IconDecorator;
+import com.adr.fonticon.lip.support.FIcon;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -32,7 +35,7 @@ public class IconBuilder implements Builder<Icon> {
     
     private Icon icon;
     
-    public static IconBuilder create(IconFont iconf, double size) {
+    public static IconBuilder create(FIcon iconf, double size) {
         
         IconBuilder builder = new IconBuilder();
         builder.icon = Icon.create();
@@ -42,7 +45,7 @@ public class IconBuilder implements Builder<Icon> {
         return builder;        
     }   
     
-    public static IconBuilder create(IconFont icon) {
+    public static IconBuilder create(FIcon icon) {
         return create(icon, 14.0);
     }
     
@@ -57,7 +60,7 @@ public class IconBuilder implements Builder<Icon> {
         return icon;
     }
     
-    public IconBuilder iconFont(IconFont iconf) {
+    public IconBuilder iconFont(FIcon iconf) {
         icon.getProperties().put("ICONLABEL", iconf.toString());
         icon.setText(iconf.getString());
         icon.setFont(Font.font(iconf.getFontName(), icon.getFont().getSize()));

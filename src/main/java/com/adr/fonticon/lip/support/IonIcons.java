@@ -15,9 +15,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
@@ -25,10 +23,10 @@ import javafx.scene.text.Font;
  * Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
  * https://twitter.com/benjsperry  https://twitter.com/ionicframework
  * MIT License: https://github.com/driftyco/ionicons
- * 
+ *
  * @author adrian
  */
-public enum IonIcons implements IconFontExt {
+public enum IonIcons implements FIcon {
 
     SPACE(' '),
 
@@ -641,15 +639,8 @@ public enum IonIcons implements IconFontExt {
     ION_WRENCH('\uF2BA'),
     ION_XBOX('\uF30C');
 
-    public static String IONICONS = null;
-    
-    static {
-        try {
-            IONICONS = Font.loadFont(IonIcons.class.getResourceAsStream("fonts/ionicons.ttf"), 10.0).getName();    
-        } catch (Exception e) {
-        }
-    } 
-    
+    final public static String IONICONS = FIcon.load("ionicons.ttf");
+
     private final char character;
 
     private IonIcons(char character) {
@@ -664,5 +655,5 @@ public enum IonIcons implements IconFontExt {
     @Override
     public String getFontName() {
         return IONICONS;
-    }    
+    }
 }

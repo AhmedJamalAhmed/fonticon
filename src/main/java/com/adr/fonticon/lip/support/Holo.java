@@ -15,9 +15,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
@@ -27,13 +25,13 @@ import javafx.scene.text.Font;
  * https://github.com/johnkil/Android-Icon-Fonts
  * Copyright 2014 Evgeny Shishkin
  * Licensed under the Apache License, Version 2.0 (the "License");
- * 
+ *
  * @author adrian
  */
-public enum Holo implements IconFontExt {
+public enum Holo implements FIcon {
 
     SPACE(' '),
-    
+
     IC_ABOUT('\uE000'),
     IC_ACCEPT('\uE001'),
     IC_ACCOUNTS('\uE002'),
@@ -179,15 +177,8 @@ public enum Holo implements IconFontExt {
     IC_WARNING('\uE08E'),
     IC_WEB_SITE('\uE08F');
 
-    public static String HOLOFONT = null;
-    
-    static {
-        try {
-            HOLOFONT = Font.loadFont(FontAwesome.class.getResourceAsStream("fonts/holo-icon-font.ttf"), 10.0).getName();    
-        } catch (Exception e) {
-        }
-    } 
-    
+    public final static String HOLOFONT = FIcon.load("holo-icon-font.ttf");
+
     private final char character;
 
     private Holo(char character) {
@@ -202,5 +193,5 @@ public enum Holo implements IconFontExt {
     @Override
     public String getFontName() {
         return HOLOFONT;
-    }    
+    }
 }

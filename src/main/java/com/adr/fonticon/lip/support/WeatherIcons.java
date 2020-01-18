@@ -15,35 +15,33 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
- *  Weather Icons 2.0.8
- *  Updated September 19, 2015
- *  Weather themed icons for Bootstrap
- *  Author - Erik Flowers - erik@helloerik.com
- *  Email: erik@helloerik.com
- *  Twitter: http://twitter.com/Erik_UX
- *  ------------------------------------------------------------------------------
- *  Maintained at http://erikflowers.github.io/weather-icons
+ * Weather Icons 2.0.8
+ * Updated September 19, 2015
+ * Weather themed icons for Bootstrap
+ * Author - Erik Flowers - erik@helloerik.com
+ * Email: erik@helloerik.com
+ * Twitter: http://twitter.com/Erik_UX
+ * ------------------------------------------------------------------------------
+ * Maintained at http://erikflowers.github.io/weather-icons
+ * <p>
+ * License
+ * ------------------------------------------------------------------------------
+ * - Font licensed under SIL OFL 1.1 -
+ * http://scripts.sil.org/OFL
+ * - CSS, SCSS and LESS are licensed under MIT License -
+ * http://opensource.org/licenses/mit-license.html
+ * - Documentation licensed under CC BY 3.0 -
+ * http://creativecommons.org/licenses/by/3.0/
+ * - Inspired by and works great as a companion with Font Awesome
+ * "Font Awesome by Dave Gandy - http://fontawesome.io"
  *
- *  License
- *  ------------------------------------------------------------------------------
- *  - Font licensed under SIL OFL 1.1 -
- *    http://scripts.sil.org/OFL
- *  - CSS, SCSS and LESS are licensed under MIT License -
- *    http://opensource.org/licenses/mit-license.html
- *  - Documentation licensed under CC BY 3.0 -
- *    http://creativecommons.org/licenses/by/3.0/
- *  - Inspired by and works great as a companion with Font Awesome
- *    "Font Awesome by Dave Gandy - http://fontawesome.io"
- * 
  * @author adrian
  */
-public enum WeatherIcons implements IconFontExt {
+public enum WeatherIcons implements FIcon {
 
     SPACE(' '),
 
@@ -632,15 +630,8 @@ public enum WeatherIcons implements IconFontExt {
     WI_WU_TSTORMS('\uF01E'),
     WI_WU_UNKNOWN('\uF00D');
 
-    public static String WEATHERICONS = null;
-    
-    static {
-        try {
-            WEATHERICONS = Font.loadFont(WeatherIcons.class.getResourceAsStream("fonts/weathericons-regular-webfont.ttf"), 10.0).getName();    
-        } catch (Exception e) {
-        }
-    } 
-    
+    final public static String WEATHERICONS = FIcon.load("weathericons-regular-webfont.ttf");
+
     private final char character;
 
     private WeatherIcons(char character) {
@@ -655,5 +646,5 @@ public enum WeatherIcons implements IconFontExt {
     @Override
     public String getFontName() {
         return WEATHERICONS;
-    }        
+    }
 }

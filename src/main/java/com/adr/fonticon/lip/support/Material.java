@@ -15,9 +15,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
@@ -30,7 +28,7 @@ import javafx.scene.text.Font;
  * 
  * @author adrian
  */
-public enum Material implements IconFontExt {
+public enum Material implements FIcon {
 
     SPACE(' '),
 
@@ -468,15 +466,8 @@ public enum Material implements IconFontExt {
     IC_WIFI_TETHERING('\uE1AF'),
     IC_WORK('\uE1B0');
 
-    public static String MATERIALFONT = null;
-    
-    static {
-        try {
-            MATERIALFONT = Font.loadFont(FontAwesome.class.getResourceAsStream("fonts/material-icon-font.ttf"), 10.0).getName();    
-        } catch (Exception e) {
-        }
-    } 
-    
+    final public static String MATERIALFONT = FIcon.load("material-icon-font.ttf");
+
     private final char character;
 
     private Material(char character) {

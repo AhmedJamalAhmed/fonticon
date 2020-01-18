@@ -15,22 +15,20 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
  * [Open Iconic v1.1.1](http://useiconic.com/open)
  * All code (including SVG markup) is under the [MIT License](http://opensource.org/licenses/MIT).
  * All fonts are under the [SIL Licensed](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL_web).
- * 
+ *
  * @author adrian
  */
-public enum OpenIconic implements IconFontExt {
+public enum OpenIconic implements FIcon {
 
     SPACE(' '),
-    
+
     ACCOUNT_LOGIN('\uE000'),
     ACCOUNT_LOGOUT('\uE001'),
     ACTION_REDO('\uE002'),
@@ -254,16 +252,9 @@ public enum OpenIconic implements IconFontExt {
     YEN('\uE0DC'),
     ZOOM_IN('\uE0DD'),
     ZOOM_OUT('\uE0DE');
-    
-    public static String OPENICONIC = null;
-    
-    static {
-        try {
-            OPENICONIC = Font.loadFont(OpenIconic.class.getResourceAsStream("fonts/open-iconic.ttf"), 10.0).getName();    
-        } catch (Exception e) {
-        }
-    } 
-    
+
+    final public static String OPENICONIC = FIcon.load("open-iconic.ttf");
+
     private final char character;
 
     private OpenIconic(char character) {
@@ -278,5 +269,5 @@ public enum OpenIconic implements IconFontExt {
     @Override
     public String getFontName() {
         return OPENICONIC;
-    }       
+    }
 }

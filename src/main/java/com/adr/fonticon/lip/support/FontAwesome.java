@@ -15,9 +15,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
-
-import javafx.scene.text.Font;
+package com.adr.fonticon.lip.support;
 
 /**
  * Icon Enum based on
@@ -26,7 +24,7 @@ import javafx.scene.text.Font;
  *
  * @author adrian
  */
-public enum FontAwesome implements IconFontExt {
+public enum FontAwesome implements FIcon {
 
     SPACE(' '),
 
@@ -705,14 +703,7 @@ public enum FontAwesome implements IconFontExt {
     FA_BLACK_TIE('\uF27E'),
     FA_FONTICONS('\uF280');
 
-    public static String AWESOMEFONT = null;
-
-    static {
-        try {
-            AWESOMEFONT = Font.loadFont(FontAwesome.class.getResourceAsStream("fonts/fontawesome-webfont.ttf"), 10.0).getName();
-        } catch (Exception e) {
-        }
-    }
+    final public static String AWESOMEFONT = FIcon.load("fontawesome-webfont.ttf");
 
     private final char character;
 

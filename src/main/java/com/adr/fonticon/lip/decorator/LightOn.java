@@ -15,9 +15,8 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License
 
-package com.adr.fonticon.decorator;
+package com.adr.fonticon.lip.decorator;
 
-import com.adr.fonticon.IconDecorator;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Shape;
@@ -26,23 +25,34 @@ import javafx.scene.shape.Shape;
  *
  * @author adrian
  */
-public class Shine implements IconDecorator {
+public class LightOn implements IconDecorator {
     
     private final Color fill;
+    private final Color bright;
     
-    public Shine(Color fill) {
+    public LightOn(Color fill, Color bright) {
         this.fill = fill;
+        this.bright = bright;
+    }
+    
+    public LightOn(Color fill) {
+        this(fill, fill);
+    }
+    
+    public LightOn() {
+        this(Color.YELLOW);
     }
     
     @Override
     public void decorate(Shape s) {
+        s.setFill(fill);
         s.setStrokeWidth(1.0);
         s.setStroke(Color.GRAY);
         
         DropShadow dropShadow = new DropShadow();
-        dropShadow.setRadius(3.0);
-        dropShadow.setSpread(0.26);
-        dropShadow.setColor(fill);
+        dropShadow.setRadius(10.0);
+        dropShadow.setSpread(0.52);
+        dropShadow.setColor(bright);
         s.setEffect(dropShadow);
     }
 }

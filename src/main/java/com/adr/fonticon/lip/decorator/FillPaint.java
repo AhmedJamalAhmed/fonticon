@@ -1,5 +1,5 @@
 //    FontIcon is a JavaFX library to use FontIcons
-//    Copyright (C) 2014-2016 Adrián Romero Corchado.
+//    Copyright (C) 2015 Adrián Romero Corchado.
 //
 //    This file is part of FontIcon
 //
@@ -13,16 +13,26 @@
 //     distributed under the License is distributed on an "AS IS" BASIS,
 //     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //     See the License for the specific language governing permissions and
-//     limitations under the License.
+//     limitations under the License
 
-package com.adr.fonticon;
+package com.adr.fonticon.lip.decorator;
+
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Shape;
 
 /**
  *
  * @author adrian
  */
-public interface IconFont {
-  
-    public String getFontName();
-    public String getString();
+public class FillPaint implements IconDecorator {
+    
+    private final Paint paint;
+    
+    public FillPaint(Paint paint) {
+        this.paint = paint;
+    }
+    @Override
+    public void decorate(Shape s) {
+        s.setFill(paint);
+    }
 }

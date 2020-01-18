@@ -15,9 +15,8 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License
 
-package com.adr.fonticon.decorator;
+package com.adr.fonticon.lip.decorator;
 
-import com.adr.fonticon.IconDecorator;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;

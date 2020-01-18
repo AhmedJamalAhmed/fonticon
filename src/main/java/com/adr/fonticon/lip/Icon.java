@@ -13,18 +13,22 @@
 //     distributed under the License is distributed on an "AS IS" BASIS,
 //     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //     See the License for the specific language governing permissions and
-//     limitations under the License
+//     limitations under the License.
 
-package com.adr.fonticon;
+package com.adr.fonticon.lip;
 
-import javafx.scene.shape.Shape;
+import javafx.geometry.VPos;
+import javafx.scene.text.Text;
 
 /**
  *
  * @author adrian
  */
-@FunctionalInterface
-public interface IconDecorator {
-    
-    public void decorate(Shape s);
+public class Icon extends Text {
+    public final static Icon create() {
+        return new Icon();
+    }
+    private Icon() {
+        setTextOrigin(VPos.TOP);
+    } 
 }
