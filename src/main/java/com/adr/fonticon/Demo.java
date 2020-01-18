@@ -17,9 +17,8 @@
 
 package com.adr.fonticon;
 
-import com.adr.fonticon.lip.decorator.*;
 import com.adr.fonticon.lip.IconBuilder;
-import com.adr.fonticon.lip.support.FIcon;
+import com.adr.fonticon.lip.decorator.*;
 import com.adr.fonticon.lip.support.*;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -123,6 +122,7 @@ public class Demo extends Application {
         filter.setPromptText("filter");
         FlowPane flow = new FlowPane();
 
+
         filter.setOnKeyReleased(event -> {
             flow.getChildren().clear();
             String f = filter.getText().toUpperCase();
@@ -130,7 +130,7 @@ public class Demo extends Application {
 
             for (FIcon icon : icons) {
                 if (icon.toString().contains(f) || icon.getString().contains(ch)) {
-                    flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build()));
+                    addButton(flow, icon);
                 }
             }
         });
@@ -149,9 +149,7 @@ public class Demo extends Application {
         flow.setPrefSize(width, screens.get(0).getBounds().getHeight() * 2 / 3);
 
         for (FIcon icon : icons) {
-            flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build(), event -> {
-                System.out.println(icon.getFontName() + "." + icon.getString());
-            }));
+            addButton(flow, icon);
         }
 
         ScrollPane p = new ScrollPane();
@@ -162,6 +160,17 @@ public class Demo extends Application {
         t.setClosable(false);
         t.setContent(vBox);
         return t;
+    }
+
+    private void addButton(FlowPane flow, FIcon icon) {
+        Tooltip tp = new Tooltip(icon.getFontName() + "." + ((Enum) icon).name());
+        Button button = createButton(IconBuilder.create(icon, 48.0).build(), evnt -> {
+            if (icon instanceof Enum) {
+                System.out.println(icon.getFontName() + "." + ((Enum) icon).name());
+            }
+        });
+        Tooltip.install(button, tp);
+        flow.getChildren().add(button);
     }
 
     private Button createButton(Node graph) {
