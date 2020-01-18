@@ -15,33 +15,24 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License
 
-package com.adr.fonticon.lip.decorator;
+package com.adr.fontIconLib.decorator;
 
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 
 /**
  *
  * @author adrian
  */
-public class Shine implements IconDecorator {
+public class FillPaint implements IconDecorator {
     
-    private final Color fill;
+    private final Paint paint;
     
-    public Shine(Color fill) {
-        this.fill = fill;
+    public FillPaint(Paint paint) {
+        this.paint = paint;
     }
-    
     @Override
     public void decorate(Shape s) {
-        s.setStrokeWidth(1.0);
-        s.setStroke(Color.GRAY);
-        
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setRadius(3.0);
-        dropShadow.setSpread(0.26);
-        dropShadow.setColor(fill);
-        s.setEffect(dropShadow);
+        s.setFill(paint);
     }
 }

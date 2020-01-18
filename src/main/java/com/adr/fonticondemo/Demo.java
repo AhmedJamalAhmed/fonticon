@@ -15,11 +15,11 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon;
+package com.adr.fonticondemo;
 
-import com.adr.fonticon.lip.IconBuilder;
-import com.adr.fonticon.lip.decorator.*;
-import com.adr.fonticon.lip.support.*;
+import com.adr.fontIconLib.IconBuilder;
+import com.adr.fontIconLib.decorator.*;
+import com.adr.fontIconLib.support.*;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

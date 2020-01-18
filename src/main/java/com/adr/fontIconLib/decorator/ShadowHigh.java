@@ -15,43 +15,39 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License
 
-package com.adr.fonticon.lip.decorator;
+package com.adr.fontIconLib.decorator;
 
 import javafx.scene.effect.BlurType;
-import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Shape;
 
 /**
  *
  * @author adrian
  */
-public class ShadowHole implements IconDecorator {
+public class ShadowHigh implements IconDecorator {
     
-    private final Color fill;
+    private final Color shadow;
     
-    public ShadowHole(Color fill) {
-        this.fill = fill;
+    public ShadowHigh(Color shadow) {
+        this.shadow = shadow;
+    }   
+    
+    public ShadowHigh() {
+        this.shadow = Color.BLACK;
     }
     
     @Override
     public void decorate(Shape s) {  
-    
-        InnerShadow shadow = new InnerShadow();
-        shadow.setColor(fill.deriveColor(1.0, 1.0, 0.7, 1.0));
-        shadow.setBlurType(BlurType.THREE_PASS_BOX);
-        shadow.setRadius(2.0);
-        shadow.setChoke(0.0);
-        shadow.setOffsetX(1.0);
-        shadow.setOffsetY(1.0);
-        s.setEffect(shadow);
 
-        LinearGradient gradient = new LinearGradient(0.0, 0.0, 0.0, 1.0, true, CycleMethod.NO_CYCLE, 
-                new Stop(0.1, fill.deriveColor(1.0, 1.0, 1.2, 1.0)),
-                new Stop(0.9, fill.deriveColor(1.0, 1.0, 0.7, 1.0)));
-        s.setFill(gradient);
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setBlurType(BlurType.ONE_PASS_BOX);
+        dropShadow.setRadius(8.0);
+        dropShadow.setOffsetX(0.0);
+        dropShadow.setOffsetY(0.0);
+        dropShadow.setColor(this.shadow.deriveColor(1.0, 1.0, 1.0, 0.5));
+        
+        s.setEffect(dropShadow);
     }
 }

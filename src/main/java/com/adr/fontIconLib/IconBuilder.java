@@ -15,67 +15,71 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 
-package com.adr.fonticon.lip;
+package com.adr.fontIconLib;
 
-import com.adr.fonticon.lip.decorator.FillPaint;
-import com.adr.fonticon.lip.decorator.Shine;
-import com.adr.fonticon.lip.support.FontAwesome;
-import com.adr.fonticon.lip.decorator.IconDecorator;
-import com.adr.fonticon.lip.support.FIcon;
+import com.adr.fontIconLib.decorator.FillPaint;
+import com.adr.fontIconLib.decorator.IconDecorator;
+import com.adr.fontIconLib.decorator.Shine;
+import com.adr.fontIconLib.support.FIcon;
+import com.adr.fontIconLib.support.FontAwesome;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.util.Builder;
 
 /**
- *
  * @author adrian
  */
 public class IconBuilder implements Builder<Icon> {
-    
+
     private Icon icon;
-    
+
     public static IconBuilder create(FIcon iconf, double size) {
-        
+
         IconBuilder builder = new IconBuilder();
         builder.icon = Icon.create();
         builder.icon.getProperties().put("ICONLABEL", iconf.toString());
         builder.icon.setText(iconf.getString());
         builder.icon.setFont(Font.font(iconf.getFontName(), size));
-        return builder;        
-    }   
-    
+        return builder;
+    }
+
+    public static Icon menu_bar(FIcon icon) {
+        return create(icon, 15.0)
+                .color(new Color(0 / 255f, 0 / 255f, 0 / 255f, 0.71)).build();
+    }
+
     public static IconBuilder create(FIcon icon) {
         return create(icon, 14.0);
     }
-    
-    public static IconBuilder create() {      
+
+    public static IconBuilder create() {
         IconBuilder builder = new IconBuilder();
         builder.icon = Icon.create();
-        return builder;        
-    }        
-    
+        return builder;
+    }
+
     @Override
     public Icon build() {
         return icon;
     }
-    
+
     public IconBuilder iconFont(FIcon iconf) {
         icon.getProperties().put("ICONLABEL", iconf.toString());
         icon.setText(iconf.getString());
         icon.setFont(Font.font(iconf.getFontName(), icon.getFont().getSize()));
         return this;
     }
-    
+
     public IconBuilder iconAwesome(FontAwesome iconf) {
         return iconFont(iconf);
     }
-    
+
     public IconBuilder styleClass(String styleClass) {
         icon.getStyleClass().add(styleClass);
         return this;
     }
-    
+
     public IconBuilder size(double size) {
         icon.setFont(Font.font(icon.getFont().getFamily(), size));
         return this;
@@ -84,15 +88,15 @@ public class IconBuilder implements Builder<Icon> {
     public IconBuilder fill(Paint fill) {
         return apply(new FillPaint(fill));
     }
-    
+
     public IconBuilder color(Color color) {
         return apply(new FillPaint(color));
     }
-    
+
     public IconBuilder shine(Color color) {
         return apply(new Shine(color));
     }
-    
+
     public IconBuilder apply(IconDecorator visitor) {
         visitor.decorate(icon);
         return this;

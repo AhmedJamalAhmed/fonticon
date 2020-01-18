@@ -15,7 +15,7 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License
 
-package com.adr.fonticon.lip.decorator;
+package com.adr.fontIconLib.decorator;
 
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;

@@ -15,39 +15,28 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License
 
-package com.adr.fonticon.lip.decorator;
+package com.adr.fontIconLib.decorator;
 
-import javafx.scene.effect.BlurType;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.paint.Color;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
+import javafx.scene.CacheHint;
 import javafx.scene.shape.Shape;
+import javafx.util.Duration;
 
 /**
  *
  * @author adrian
  */
-public class ShadowHigh implements IconDecorator {
-    
-    private final Color shadow;
-    
-    public ShadowHigh(Color shadow) {
-        this.shadow = shadow;
-    }   
-    
-    public ShadowHigh() {
-        this.shadow = Color.BLACK;
-    }
-    
+public class Rotate implements IconDecorator {
     @Override
-    public void decorate(Shape s) {  
-
-        DropShadow dropShadow = new DropShadow();
-        dropShadow.setBlurType(BlurType.ONE_PASS_BOX);
-        dropShadow.setRadius(8.0);
-        dropShadow.setOffsetX(0.0);
-        dropShadow.setOffsetY(0.0);
-        dropShadow.setColor(this.shadow.deriveColor(1.0, 1.0, 1.0, 0.5));
-        
-        s.setEffect(dropShadow);
-    }
+    public void decorate(Shape s) {
+        s.setCacheHint(CacheHint.ROTATE);
+        RotateTransition rt = new RotateTransition(Duration.millis(1000), s);
+        rt.setFromAngle(0);
+        rt.setToAngle(360);
+        rt.setCycleCount(Animation.INDEFINITE);
+        rt.setInterpolator(Interpolator.LINEAR);
+        rt.play();    
+    }  
 }
