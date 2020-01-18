@@ -25,7 +25,7 @@ import javafx.scene.text.Font;
 public interface FIcon {
 
     static String load(String fileName) {
-        return Font.loadFont(FontAwesome.class.getResourceAsStream("/com/adr/fontIconLib/icons/" + fileName), 10.0).getName();
+        return Font.loadFont(FontAwesome.class.getResourceAsStream("/icons/" + fileName), 10.0).getName();
     }
 
     String getFontName();
