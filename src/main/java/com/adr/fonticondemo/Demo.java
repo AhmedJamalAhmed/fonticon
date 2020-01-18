@@ -126,10 +126,10 @@ public class Demo extends Application {
         filter.setOnKeyReleased(event -> {
             flow.getChildren().clear();
             String f = filter.getText().toUpperCase();
-            String ch = filter.getText();
 
             for (FIcon icon : icons) {
-                if (icon.toString().contains(f) || icon.getString().contains(ch)) {
+                String representationName = (icon.getFontName() + icon.toString() + "." + ((Enum) icon).name()).toUpperCase();
+                if (representationName.contains(f)) {
                     addButton(flow, icon);
                 }
             }
@@ -163,13 +163,10 @@ public class Demo extends Application {
     }
 
     private void addButton(FlowPane flow, FIcon icon) {
-        Tooltip tp = new Tooltip(icon.getFontName() + "." + ((Enum) icon).name());
         Button button = createButton(IconBuilder.create(icon, 48.0).build(), evnt -> {
-            if (icon instanceof Enum) {
-                System.out.println(icon.getFontName() + "." + ((Enum) icon).name());
-            }
+            Tooltip tp = new Tooltip(icon.getFontName() + "." + ((Enum) icon).name());
+            Tooltip.install((Node) evnt.getSource(), tp);
         });
-        Tooltip.install(button, tp);
         flow.getChildren().add(button);
     }
 
