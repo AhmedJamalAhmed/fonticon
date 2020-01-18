@@ -17,33 +17,34 @@
 
 package com.adr.fonticon;
 
-import com.adr.fonticon.decorator.FillPaint;
-import com.adr.fonticon.decorator.Rotate;
-import com.adr.fonticon.decorator.ShadowHigh;
-import com.adr.fonticon.decorator.ShadowHole;
-import com.adr.fonticon.decorator.Shine;
-
+import com.adr.fonticon.decorator.*;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author adrian
  */
 public class Demo extends Application {
+
+    public static void main(String[] args) {
+        Application.launch(args);
+    }
 
     @Override
     public void start(Stage stage) {
@@ -84,20 +85,31 @@ public class Demo extends Application {
         t.setContent(p);
         tabpane.getTabs().add(t);
 
-        addFontIcon(tabpane, FontAwesome.class.getSimpleName(), FontAwesome.values());
-        addFontIcon(tabpane, IonIcons.class.getSimpleName(), IonIcons.values());
-        addFontIcon(tabpane, Octicons.class.getSimpleName(), Octicons.values());
-        addFontIcon(tabpane, OpenIconic.class.getSimpleName(), OpenIconic.values());
-        addFontIcon(tabpane, WeatherIcons.class.getSimpleName(), WeatherIcons.values());
-        addFontIcon(tabpane, Material.class.getSimpleName(), Material.values());
-        addFontIcon(tabpane, Holo.class.getSimpleName(), Holo.values());
+        List<? extends Class<? extends Enum<? extends IconFont>>> supportedIcons = Arrays.asList(
+                FontAwesome.class,
+                IonIcons.class,
+                Octicons.class,
+                OpenIconic.class,
+                WeatherIcons.class,
+                Material.class,
+                Holo.class
+        );
+
+        ArrayList<IconFont> all = new ArrayList<>();
+        for (Class<? extends Enum<? extends IconFont>> iconFont : supportedIcons) {
+            IconFont[] enumConstants = (IconFont[]) iconFont.getEnumConstants();
+            all.addAll(Arrays.asList(enumConstants));
+            tabpane.getTabs().add(addFontIcon(iconFont.getSimpleName(), enumConstants));
+        }
+
+        tabpane.getTabs().add(1, addFontIcon("All Icons", all.toArray(new IconFont[0])));
 
         Scene scene = new Scene(tabpane);
         stage.setScene(scene);
         stage.show();
     }
 
-    private void addFontIcon(TabPane tabpane, String name, IconFont[] icons) {
+    private Tab addFontIcon(String name, IconFont[] icons) {
         VBox vBox = new VBox();
         vBox.setPadding(new Insets(5, 5, 5, 5));
         vBox.setSpacing(5);
@@ -112,7 +124,7 @@ public class Demo extends Application {
             String ch = filter.getText();
 
             for (IconFont icon : icons) {
-                if (icon.toString().contains(f) || icon.getString().equals(ch)) {
+                if (icon.toString().contains(f) || icon.getString().contains(ch)) {
                     flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build()));
                 }
             }
@@ -122,8 +134,14 @@ public class Demo extends Application {
         flow.setVgap(6);
         flow.setHgap(6);
         flow.setPadding(new Insets(6));
-        flow.setPrefWrapLength(100);
-        flow.setPrefSize(650.0, 500.0);
+        flow.setColumnHalignment(HPos.CENTER);
+        flow.setRowValignment(VPos.CENTER);
+        ObservableList<Screen> screens = Screen.getScreens();
+
+        double width = screens.get(0).getBounds().getWidth() * 3 / 4;
+        flow.setPrefWrapLength(width);
+
+        flow.setPrefSize(width, screens.get(0).getBounds().getHeight() * 2 / 3);
 
         for (IconFont icon : icons) {
             flow.getChildren().add(createButton(IconBuilder.create(icon, 48.0).build()));
@@ -131,11 +149,12 @@ public class Demo extends Application {
 
         ScrollPane p = new ScrollPane();
         p.setContent(flow);
+
         vBox.getChildren().add(filter);
         vBox.getChildren().add(p);
         t.setClosable(false);
         t.setContent(vBox);
-        tabpane.getTabs().add(t);
+        return t;
     }
 
     private Button createButton(Node graph) {
@@ -144,14 +163,15 @@ public class Demo extends Application {
 
     private Button createButton(String text, Node graph) {
         Button b = new Button(text, graph);
-        b.setMinSize(200.0, 120.0);
-        b.setMaxSize(200.0, 120.0);
-        b.setPrefSize(200.0, 120.0);
+
+        double v = 80;
+        double v1 = 80;
+
+        b.setMinSize(v, v1);
+        b.setMaxSize(v, v1);
+        b.setPrefSize(v, v1);
+
         b.setContentDisplay(ContentDisplay.TOP);
         return b;
-    }
-
-    public static void main(String[] args) {
-        Application.launch(args);
     }
 }

@@ -21,15 +21,15 @@ import javafx.scene.text.Font;
 
 /**
  * Icon Enum based on
- *  Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome
- *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ * Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome
+ * License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
  *
  * @author adrian
  */
 public enum FontAwesome implements IconFontExt {
 
     SPACE(' '),
-    
+
     FA_GLASS('\uF000'),
     FA_MUSIC('\uF001'),
     FA_SEARCH('\uF002'),
@@ -704,16 +704,16 @@ public enum FontAwesome implements IconFontExt {
     FA_VIMEO('\uF27D'),
     FA_BLACK_TIE('\uF27E'),
     FA_FONTICONS('\uF280');
-    
+
     public static String AWESOMEFONT = null;
-    
+
     static {
         try {
-            AWESOMEFONT = Font.loadFont(FontAwesome.class.getResourceAsStream("fonts/fontawesome-webfont.ttf"), 10.0).getName();    
+            AWESOMEFONT = Font.loadFont(FontAwesome.class.getResourceAsStream("fonts/fontawesome-webfont.ttf"), 10.0).getName();
         } catch (Exception e) {
         }
-    } 
-    
+    }
+
     private final char character;
 
     private FontAwesome(char character) {
